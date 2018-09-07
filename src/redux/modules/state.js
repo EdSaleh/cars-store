@@ -1,11 +1,11 @@
-import {AVAILABILITY_FETCH_FAILED, AVAILABILITY_FETCH_SUCCEEDED,CARS_FETCH_FAILED, CARS_FETCH_SUCCEEDED, SORT} from '../../sagas' 
+import {AVAILABILITY_FETCH_FAILED, AVAILABILITY_FETCH, CARS_FETCH_FAILED, CARS_FETCH, SORT} from '../../sagas' 
 import {SORT_AVAILABILITY, SORT_NAME} from '../../components/cars-list';
 export default function(state = {}, action) {
   switch(action.type) {
-  case AVAILABILITY_FETCH_SUCCEEDED:return;
-  case AVAILABILITY_FETCH_FAILED: return;
-  case CARS_FETCH_SUCCEEDED: return;
-  case CARS_FETCH_FAILED: return;
+  case CARS_FETCH: return action.cars;
+  case AVAILABILITY_FETCH:  return state.cars.map(x=>x.id===action.id? {...x, availability:action.availability}:x);
+  case CARS_FETCH_FAILED: return state;
+  case AVAILABILITY_FETCH_FAILED: return state;
   case SORT: 
     switch(state.sort){
     case SORT_NAME:
