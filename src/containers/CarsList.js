@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import HelloReact from 'components/HelloReact';
+import CarsList from 'components/cars-list';
 
 function mapStateToProps(state) {
   return {
@@ -8,4 +8,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(HelloReact);
+export default connect(mapStateToProps)(CarsList);
