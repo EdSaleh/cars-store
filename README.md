@@ -1,5 +1,6 @@
 # Redux Saga Exercise
 
+
 NOTE: If you are unsure about any questions please state your assumption and build your solution on that assumption.
 
 IMPORTANT: Please send the code and system diagram either by uploading to Github or Google Docs or Dropbox. Please DON’T send it via ZIP file, the firewall will reject your email. 
@@ -23,5 +24,13 @@ GET /cars
 RESPONSE:  [ {id: 1, img: http://myfancycar/image, name: “My Fancy Car”, make: “MyMake”, model: “MyModel”, year: 2018} ….]
 
 Q2. You have been given an opportunity to re-architect the Walmart.ca website, which is an extremely high traffic website. For this re-architecture, please draw a detailed System architecture diagram describing different components to build a scalable web application. Please state any assumptions you would like to make. 
+
+
+# Build
+> npm run build
+
+# Start
+> npm start
+
 
 By Ahmed Saleh
