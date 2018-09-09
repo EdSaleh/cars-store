@@ -1,14 +1,22 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as styles from "./App.css";
+import"./App.css";
 import {AVAILABILITY_FETCH, CARS_FETCH, SORT} from './sagas' 
 
 export const SORT_NAME = 'name';
 export const SORT_AVAILABILITY = 'availability' 
 
 class App extends Component {
-
+  constructor(props) {
+    super(props);
+    const  { onCars }  = this.props;
+    onCars();
+    setInterval(()=>{
+      const { cars, onAvailability } = this.props;
+      cars.map(car=>onAvailability(car.id))
+    },2000);
+  }
   static propTypes = {
     cars: PropTypes.arrayOf(PropTypes.shape({
       img: PropTypes.string.isRequired,
@@ -24,34 +32,29 @@ class App extends Component {
   }
 
   render() {
-    const  { cars, sort, onSort, onCars }  = this.props;
+    const  { cars, sort, onSort }  = this.props;
     return (
-      <div>
-        <button onClick={onCars}></button>
-        <main className={styles['grid']}>
-          <div id={styles['filter-group']}>
-            <span>Filter: </span>
-            <select defaultValue={sort}>
-              {[SORT_NAME, SORT_AVAILABILITY].map((option, i) => <option key={i} onSelect={onSort} >{option}</option>)}
-            </select>
-          </div>
-          {cars.map((car, i)=>
-            <article key={i}>
-              <img src={car.img} alt=""></img>
-              <div>
-                <h2>{car.name}</h2>
-                <p className={styles['text']}>
-                  <div>Make: {car.make}</div>
-                  <div>Model: {car.model}</div>
-                  <div>{car.availability}</div>
-                  {
-                    (car.availability==='Available')?<button>Buy</button>:<span></span>
-                  }
-                </p>
-              </div>
-            </article>
-          )}
-        </main>
+      <div className='grid'>
+        <div id='filter-group'>
+          <span>Filter: </span>
+          <select defaultValue={sort} onChange={(e)=>onSort(e.currentTarget.value)}>
+            {[SORT_NAME, SORT_AVAILABILITY].map((option, i) => <option key={i}>{option}</option>)}
+          </select>
+        </div>
+        {cars.map((car, i)=>
+          <article key={i}>
+            <img src={car.img} alt=""></img>
+            <div>
+              <h2>{car.name}</h2>
+              <h3>Make: {car.make}</h3>
+              <h3>Model: {car.model}</h3>
+              <h3>{car.availability}</h3>
+              {
+                (car.availability==='Available')?<button>Buy</button>:<span></span>
+              }
+            </div>
+          </article>
+        )}
       </div>
     );
   }
@@ -64,7 +67,7 @@ function mapDispatchToProps(dispatch) {
   return {
     onCars: () => dispatch({ type: CARS_FETCH }),
     onAvailability: (id) => dispatch({ type: AVAILABILITY_FETCH, payload:id }),
-    onSort: (name) => dispatch({  type: SORT, payload:name}),
+    onSort: (name) => dispatch({ type: SORT, payload:name })
   };
 }
 

@@ -1,5 +1,5 @@
 
-import { call, put, all, take, takeLatest } from 'redux-saga/effects';
+import { call, put, all, takeEvery } from 'redux-saga/effects';
 export const CARS_FETCH='CARS_FETCH';
 export const CARS_FETCH_SUCCESS='CARS_FETCH_SUCCESS';
 export const CARS_FETCH_FAILED ='CARS_FETCH_FAILED';
@@ -16,7 +16,7 @@ class Api {
 export function* fetchCars() {
   try {
     const cars = yield call(Api.fetchCars);
-    yield put({ type: CARS_FETCH_SUCCESS, cars });
+    yield put({ type: CARS_FETCH_SUCCESS, cars })
   } catch (e) {
     yield put({ type: CARS_FETCH_FAILED, message: e.message });
   }
@@ -24,7 +24,6 @@ export function* fetchCars() {
 
 export function* fetchAvailability(id) {
   try {    
-    yield take(AVAILABILITY_FETCH);
     const availability = yield call(Api.fetchAvailability, id);
     yield put({ type: AVAILABILITY_FETCH_SUCCESS, id, availability });
   } catch (e) {
@@ -35,7 +34,7 @@ export function* fetchAvailability(id) {
 // single entry point to start all Sagas at once
 export default function* rootSaga() {
   yield all([
-    takeLatest(CARS_FETCH, fetchCars),
-    takeLatest(AVAILABILITY_FETCH, fetchAvailability)
+    takeEvery(CARS_FETCH, fetchCars),
+    takeEvery(AVAILABILITY_FETCH, fetchAvailability)
   ]);
 }

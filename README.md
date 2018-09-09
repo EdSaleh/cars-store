@@ -26,9 +26,6 @@ RESPONSE:  [ {id: 1, img: http://myfancycar/image, name: “My Fancy Car”, mak
 Q2. You have been given an opportunity to re-architect the Walmart.ca website, which is an extremely high traffic website. For this re-architecture, please draw a detailed System architecture diagram describing different components to build a scalable web application. Please state any assumptions you would like to make. 
 
 
-# Build
-> npm run build
-
 # Start
 > npm start
 

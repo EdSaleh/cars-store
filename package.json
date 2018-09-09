@@ -4,6 +4,7 @@
   "proxy": "http://localhost:3000/",
   "private": true,
   "devDependencies": {
+    "eslint-plugin-react": "^7.11.1",
     "react-scripts": "1.0.17"
   },
   "dependencies": {
