@@ -1,11 +1,15 @@
 {
-  "name": "redux-saga-exercise",
+  "name": "cars-store",
   "version": "0.1.0",
   "proxy": "http://localhost:3000/",
   "private": true,
   "devDependencies": {
     "eslint-plugin-react": "^7.11.1",
     "react-scripts": "1.0.17"
+  },
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/EdSaleh/cars-store.git"
   },
   "dependencies": {
     "axios": "^0.17.1",
